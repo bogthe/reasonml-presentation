@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/blood.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-markdown data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+                <textarea data-template>
+                        ## ReasonML an introduction
+                        @_bogthe [|]() bogthe.me [|]() github.com/bogthe
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                        ## What is ReasonML?
+- A new syntax and toolchain for OCaml;<!-- .element: class="fragment" data-fragment-index="1" -->
+- Looks a lot like JavaScript ES6 / (~ES2030);<!-- .element: class="fragment" data-fragment-index="2" -->
+- Strong Static Types and Type Inference;<!-- .element: class="fragment" data-fragment-index="3" -->
+                    </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                        ## Why talk about it at a JS meetup?
+- Compiles to JavaScript and Native;<!-- .element: class="fragment" data-fragment-index="1" -->
+- Uses existing JS tools, npm / yarn / webpack;<!-- .element: class="fragment" data-fragment-index="2" -->
+- React, Redux, React Router, ImmutableJS, ESLint, Babel, Lodash;<!-- .element: class="fragment" data-fragment-index="3" -->
+- It's pragmantic;<!-- .element: class="fragment" data-fragment-index="4" -->
+                    </script>
+            </section>
+
+            <section>
+                <h2>A note on statistics</h2>
+                <blockquote>
+                    &ldquo;There are 3 types of lies: lies, damn lies and statistics&ldquo;
+                </blockquote>
+                <q>Benjamin Disraeli</q>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+## Some say it's the best way to write React
+- Reason's creator is also React's creator;
+                    </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+## Cut the sales pitch
+- "No Silver Bullet";<!-- .element: class="fragment" data-fragment-index="1" -->
+- Essence vs accidents of software engineering;<!-- .element: class="fragment" data-fragment-index="2" -->
+- Functional programming, another tool to Reason;<!-- .element: class="fragment" data-fragment-index="2" -->
+                    </script>
+            </section>
+
+            <section>
+            <section data-markdown>
+                <textarea data-template>
+## How does Reason look like?
+```js
+let add = (x, y) => x + y;
+let result = add(1, 2); // result = 3;
+
+// currying for free!
+let succ = add(1);
+let four = succ(3); // four = 4;
+
+// be a FP hipster with pipe operator;
+let five = four |> succ; // same as succ(4);
+```
+                </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+```js
+let someString = "Hello world!";
+// someString = "No can do"; !all variables are immutable by default;
+let mut changeMe = "I change a lot";
+changeMe = "yes you do…";
+
+let namedArgs = (~greeting) => greeting ++ " Joe!";
+namedArgs(~greeting = "Ola"); // Ola Joe!
+```
+                </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    ## LIVE DEMO!
+```js
+type bevarage = 
+    | Beer
+    | Tea
+    | Cocktail(string);
+
+let customerOrder = Cocktail("mojito");
+
+let toPay = switch(customerOrder) {
+    | Beer => 3.2
+    | Tea => 2.2
+    | Cocktail(selection) => selection == "mojito" ? 1.0 : 5.0;
+}
+// toPay = 1.
+```
+                </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+```js
+let someList = [1, 2, 3];
+let first = switch(someList) {
+    | [head, ..._tail] => head
+    | [] => 0
+}
+// first = 1;
+```
+                </textarea>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+```js
+type livingStatus =
+    | Alive
+    | Dead;
+
+type person = {
+    name: string,
+    age: int,
+    status: livingStatus,
+};
+
+let joe = {
+    name: "Joe",
+    age: 35,
+    status: Alive,
+};
+// joe is infered to be a person, amazing *__*
+```
+                </textarea>
+            </section>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    ## Real world examples
+                    This is where I open my editor up…
+                </textarea>
+            </section>
+
+            <section data-markdown data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+                <textarea data-template>
+                    ## Thank you
+                    /reasonml.github.io/
+
+                    @_bogthe [|]() bogthe.me [|]() github.com/bogthe
+                </textarea>
+            </section>
+        </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+        // More info about config & dependencies:
+        // - https://github.com/hakimel/reveal.js#configuration
+        // - https://github.com/hakimel/reveal.js#dependencies
+        Reveal.initialize({
+            dependencies: [
+                { src: 'plugin/markdown/marked.js' },
+                { src: 'plugin/markdown/markdown.js' },
+                { src: 'plugin/notes/notes.js', async: true },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+            ],
+            transition: "convex"
+        });
+    </script>
+</body>
+
+</html>

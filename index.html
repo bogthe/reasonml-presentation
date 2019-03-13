@@ -101,8 +101,8 @@ let five = four |> succ; // same as succ(4);
 ```js
 let someString = "Hello world!";
 // someString = "No can do"; !all variables are immutable by default;
-let mut changeMe = "I change a lot";
-changeMe = "yes you do…";
+let changeMe = ref("I change a lot");
+changeMe := "yes you do…";
 
 let namedArgs = (~greeting) => greeting ++ " Joe!";
 namedArgs(~greeting = "Ola"); // Ola Joe!
